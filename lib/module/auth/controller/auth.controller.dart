@@ -13,7 +13,7 @@ class AuthController extends ChangeNotifier {
   TextEditingController emailCtrl = TextEditingController();
   Box<String> userInfo = Hive.box<String>(Config.dbName);
   bool isObscure = true;
-
+  bool signUpLoader = false;
   onPasswordVisible(bool val) {
     isObscure = val;
     notifyListeners();
@@ -21,6 +21,8 @@ class AuthController extends ChangeNotifier {
 
   void registerUser(context) async {
     userInfo.put(Config().name, nameCtrl.text);
+    signUpLoader = true;
+    notifyListeners();
     try {
       await FirebaseAuth.instance
           .createUserWithEmailAndPassword(
@@ -29,6 +31,8 @@ class AuthController extends ChangeNotifier {
       )
           .then((value) {
         if (value.user != null) {
+          signUpLoader = false;
+          notifyListeners();
           Navigator.of(context)
               .pushNamedAndRemoveUntil(HomeScreen.route, (route) => true);
         }
@@ -60,8 +64,11 @@ class AuthController extends ChangeNotifier {
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(
               email: emailCtrl.text, password: passwordCtrl.text)
-          .then((value) {
+          .then((value) async {
         if (value.user != null) {
+          String? idToken = await value.user?.getIdToken();
+          log(idToken.toString());
+          userInfo.put('tokenKey', idToken!);
           Navigator.of(context)
               .pushNamedAndRemoveUntil(HomeScreen.route, (route) => true);
         } else {
@@ -124,5 +131,11 @@ class AuthController extends ChangeNotifier {
   Future<void> signOut() async {
     await FirebaseAuth.instance.signOut();
     notifyListeners();
+  }
+
+  clearData() {
+    passwordCtrl.clear();
+    emailCtrl.clear();
+    nameCtrl.clear();
   }
 }

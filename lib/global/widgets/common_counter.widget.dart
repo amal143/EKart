@@ -52,7 +52,7 @@ class CommonCounterWidget extends StatelessWidget {
 
               //!---Text
               Text(
-                productCtrl.productList[index]['cartCount'].toString(),
+                productCtrl.cartItemlist[index]['cartCount'].toString(),
                 style: GoogleFonts.urbanist(
                     fontSize: 18, fontWeight: FontWeight.w600, color: kPrimary),
               ),

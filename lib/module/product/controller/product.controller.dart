@@ -35,6 +35,7 @@ class ProductController extends ChangeNotifier {
       });
       productInfo.put('productList', productList);
       netAmount = netAmount + price;
+      userInfo.put('netAmount', netAmount.toString());
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         backgroundColor: kBlack,
         showCloseIcon: true,
@@ -62,6 +63,8 @@ class ProductController extends ChangeNotifier {
     notifyListeners();
     Timer(const Duration(seconds: 3), () async {
       await cartItemlist.removeAt(index);
+      netAmount = netAmount - cartItemlist[index]['price'];
+      userInfo.put('netAmount', netAmount.toString());
       deleteLoader = false;
       notifyListeners();
     });

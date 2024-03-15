@@ -1,5 +1,6 @@
 import 'package:ekart/global/config/config.dart';
 import 'package:ekart/global/constants/assets/asset.constants.dart';
+import 'package:ekart/global/constants/inerceptor/interceptor.dart';
 import 'package:ekart/global/dimensions/dimensions.dart';
 import 'package:ekart/global/styles/colors.dart';
 import 'package:ekart/global/widgets/common_btton.widget.dart';
@@ -153,7 +154,7 @@ class _CartScreenState extends State<CartScreen> {
                                             ),
                                           ),
                                           Text(
-                                            "Price: ${productCtrl.cartItemlist[index]["price"]}",
+                                            "Price: ${productCtrl.cartItemlist[index]["price"].toStringAsFixed(3)}",
                                             style: GoogleFonts.urbanist(
                                                 fontSize: 17,
                                                 fontWeight: FontWeight.w500,
@@ -198,12 +199,15 @@ class _CartScreenState extends State<CartScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                productCtrl.netAmount.toString(),
-                style: GoogleFonts.urbanist(
-                    fontSize: 16, fontWeight: FontWeight.bold, color: kBlack),
-                overflow: TextOverflow.ellipsis,
-                textAlign: TextAlign.justify,
+              SizedBox(
+                width: size.width * 0.4,
+                child: Text(
+                  '₹ ${double.parse(userInfo.get('netAmount') ?? "0").toStringAsFixed(3)}',
+                  style: GoogleFonts.urbanist(
+                      fontSize: 16, fontWeight: FontWeight.bold, color: kBlack),
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.justify,
+                ),
               ),
               CommonButtonWidget(
                   onTap: () {},

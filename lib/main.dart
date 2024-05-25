@@ -1,7 +1,4 @@
 import 'dart:io';
-
-import 'package:ekart/firebase_options.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,16 +7,11 @@ import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'global/config/config.dart';
-import 'global/dependency_injection/get_it.dart';
 import 'global/providers/providers.dart';
 import 'global/routes/routes.dart';
 
 void main() async {
-  setupGetIt();
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
   //*--- Hive
   Directory document = await getApplicationDocumentsDirectory();
   Hive.init(document.path);

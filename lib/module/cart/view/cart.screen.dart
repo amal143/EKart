@@ -5,14 +5,14 @@ import 'package:ekart/global/dimensions/dimensions.dart';
 import 'package:ekart/global/styles/colors.dart';
 import 'package:ekart/global/widgets/common_btton.widget.dart';
 import 'package:ekart/global/widgets/common_counter.widget.dart';
-import 'package:ekart/module/cart/controller/cart.controller.dart';
+import 'package:ekart/module/cart/presenter/cart.presenter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:provider/provider.dart';
 
-import '../../product/controller/product.controller.dart';
+import '../../product/presenter/product.presenter.dart';
 
 class CartScreen extends StatefulWidget {
   static const route = '/cart';
@@ -27,15 +27,14 @@ class _CartScreenState extends State<CartScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final productCtrl =
-          Provider.of<ProductController>(context, listen: false);
+      final productCtrl = Provider.of<ProductPresenter>(context, listen: false);
       productCtrl.onInIt();
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Consumer2<CartController, ProductController>(
+    return Consumer2<CartPresenter, ProductPresenter>(
         builder: (context, cartCtrl, productCtrl, _) {
       return Scaffold(
         body: SafeArea(

@@ -4,7 +4,7 @@ import 'package:ekart/module/home/model/product.model.dart';
 import 'package:ekart/module/home/service/get_product_service.dart';
 import 'package:flutter/cupertino.dart';
 
-class HomeController extends ChangeNotifier {
+class HomePresenter extends ChangeNotifier {
   bool apiLoader = false;
   TextEditingController searchCtrl = TextEditingController();
   List<ProductModel> products = [];

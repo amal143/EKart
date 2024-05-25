@@ -1,17 +1,15 @@
 import 'dart:developer';
-
 import 'package:ekart/global/constants/inerceptor/interceptor.dart';
-import 'package:ekart/module/product/controller/product.controller.dart';
+import 'package:ekart/module/product/presenter/product.presenter.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class CartController extends ChangeNotifier {
+class CartPresenter extends ChangeNotifier {
   int counter = 1;
   int currentIndex = -1;
   onMinus(context, price, index) {
     if (counter >= 1) {
-      final productCtrl =
-          Provider.of<ProductController>(context, listen: false);
+      final productCtrl = Provider.of<ProductPresenter>(context, listen: false);
       productCtrl.netAmount = productCtrl.netAmount -
           (price / productCtrl.cartItemlist[index]['cartCount']);
       price = price - price / productCtrl.cartItemlist[index]['cartCount'];
@@ -25,7 +23,7 @@ class CartController extends ChangeNotifier {
 
   onPlus(context, price, index) {
     log(index.toString());
-    final productCtrl = Provider.of<ProductController>(context, listen: false);
+    final productCtrl = Provider.of<ProductPresenter>(context, listen: false);
     productCtrl.netAmount = productCtrl.netAmount +
         (price / productCtrl.cartItemlist[index]['cartCount']);
     price = price + price / productCtrl.cartItemlist[index]['cartCount'];
@@ -42,7 +40,7 @@ class CartController extends ChangeNotifier {
   }
 
   updateCartItemList(int index, price, count, context) {
-    final productCtrl = Provider.of<ProductController>(context, listen: false);
+    final productCtrl = Provider.of<ProductPresenter>(context, listen: false);
 
     productCtrl.cartItemlist[index] = {
       "productImage": productCtrl.cartItemlist[index]['productImage'],

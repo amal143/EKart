@@ -1,6 +1,4 @@
 import 'dart:async';
-
-import 'package:ekart/global/constants/inerceptor/interceptor.dart';
 import 'package:ekart/global/dimensions/dimensions.dart';
 import 'package:ekart/module/home/view/home.screen.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +7,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import '../../../global/styles/colors.dart';
-import '../../auth/view/sign_in.screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -22,14 +19,9 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(const Duration(seconds: 3), () async {
-      if (userInfo.get('tokenKey') == null) {
-        Navigator.of(context)
-            .pushNamedAndRemoveUntil(SignInScreen.route, (route) => true);
-      } else {
-        Navigator.of(context)
-            .pushNamedAndRemoveUntil(HomeScreen.route, (route) => true);
-      }
+    Timer(const Duration(seconds: 2), () async {
+      Navigator.of(context)
+          .pushNamedAndRemoveUntil(HomeScreen.route, (route) => true);
     });
   }
 

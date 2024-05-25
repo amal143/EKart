@@ -7,7 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../global/styles/colors.dart';
 
-class ProductController extends ChangeNotifier {
+class ProductPresenter extends ChangeNotifier {
   List productList = [];
   double netAmount = 0.0;
   void addToCart(context, String productImage, String productName, double price,

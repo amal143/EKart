@@ -1,7 +1,7 @@
 import 'package:ekart/global/dimensions/dimensions.dart';
 import 'package:ekart/global/styles/colors.dart';
 import 'package:ekart/global/widgets/common_btton.widget.dart';
-import 'package:ekart/module/product/controller/product.controller.dart';
+import 'package:ekart/module/product/presenter/product.presenter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 
 import '../../../global/config/config.dart';
 import '../../../global/widgets/cart_icon.widget.dart';
-import '../../home/controller/home.controller.dart';
+import '../../home/presenter/home.presenter.dart';
 
 class ProductScreen extends StatelessWidget {
   static const route = '/product';
@@ -17,7 +17,7 @@ class ProductScreen extends StatelessWidget {
   final int index;
   @override
   Widget build(BuildContext context) {
-    return Consumer2<HomeController, ProductController>(
+    return Consumer2<HomePresenter, ProductPresenter>(
         builder: (context, homeCtrl, productCtrl, _) {
       return Scaffold(
         backgroundColor: kWhite,

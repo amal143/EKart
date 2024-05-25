@@ -2,7 +2,7 @@ import 'package:ekart/global/config/config.dart';
 import 'package:ekart/global/dimensions/dimensions.dart';
 import 'package:ekart/global/styles/colors.dart';
 import 'package:ekart/module/cart/view/cart.screen.dart';
-import 'package:ekart/module/home/controller/home.controller.dart';
+import 'package:ekart/module/home/presenter/home.presenter.dart';
 import 'package:ekart/module/product/view/product.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -25,14 +25,14 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final homeCtrl = Provider.of<HomeController>(context, listen: false);
+      final homeCtrl = Provider.of<HomePresenter>(context, listen: false);
       homeCtrl.callGetProductsApiService();
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<HomeController>(builder: (context, homeCtrl, _) {
+    return Consumer<HomePresenter>(builder: (context, homeCtrl, _) {
       return Scaffold(
         backgroundColor: kWhite,
         body: SafeArea(

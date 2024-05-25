@@ -79,9 +79,6 @@ Future<Response> httpRequests(
     bool setAppLoading = true}) async {
   //?---------------------------------------------------------------- ( global loading  )
 
-  // final globalCnt = Provider.of<GlobalController>(globalContext, listen: false);
-  // globalCnt.changeApiLoading(setAppLoading);
-
   log("---------------------------------------------------------------- ( API request data logs)\n");
   log("${headers.toString()} ", name: "TOKEN");
   log(url, name: "API URL");
@@ -127,15 +124,6 @@ Future<Response> httpRequests(
   }
 }
 
-//?----------------------------------------------------------------- ( unAuthorized methods )
-
-// unAuthMethod(Response response) {
-//   if (json.decode(response.body)['message'].toString() == '401000') {
-//     navigationKey.currentState!.pushNamed('/verifyCid');
-//     userInfo.delete(DbKey().tokenKey);
-//   }
-// }
-
 //? ---------------------------------------------------------------- ( API resource logs )
 apiLogs(String errorCode, Response response) {
   try {
@@ -157,30 +145,3 @@ apiLogs(String errorCode, Response response) {
     log(e.toString());
   }
 }
-
-// //?---------------------------------------------------------------- ( Multipart request )
-
-// Future<int> uploadCivilId(
-//     File frontFilepath, File backFilepath, String token) async {
-//   final request = MultipartRequest('post', Uri.parse(urlUploadCivilId));
-//   int length = await frontFilepath.length();
-//   int lengthTwo = await backFilepath.length();
-//   // ignore: deprecated_member_use
-//   var stream = ByteStream(DelegatingStream.typed(frontFilepath.openRead()));
-//   // ignore: deprecated_member_use
-//   var streamTwo = ByteStream(DelegatingStream.typed(backFilepath.openRead()));
-//   final frontImage = MultipartFile("front_side_image", stream, length,
-//       filename: basename(frontFilepath.path));
-//   final backImage = MultipartFile("back_side_image", streamTwo, lengthTwo,
-//       filename: basename(backFilepath.path));
-
-//   request.files.add(frontImage);
-//   request.files.add(backImage);
-//   request.headers['Authorization'] = token;
-//   final response = await https.send(request);
-//   var printResponse = await response.stream.bytesToString();
-
-//   log(printResponse);
-//   log(response.statusCode.toString());
-//   return response.statusCode;
-// }

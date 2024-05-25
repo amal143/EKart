@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 
-class GlobalController with ChangeNotifier {
+class GlobalPresenter with ChangeNotifier {
   //*---------------------------------------------------- Api Loading
   bool _apiLoading = false;
   bool get apiLoading => _apiLoading;

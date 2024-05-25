@@ -1,11 +1,10 @@
-import 'package:ekart/module/cart/controller/cart.controller.dart';
-import 'package:ekart/module/product/controller/product.controller.dart';
+import 'package:ekart/global/widgets/counter.button.dart';
+import 'package:ekart/module/cart/presenter/cart.presenter.dart';
+import 'package:ekart/module/product/presenter/product.presenter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import '../config/config.dart';
 import '../constants/assets/asset.constants.dart';
 import '../dimensions/dimensions.dart';
 import '../styles/colors.dart';
@@ -25,7 +24,7 @@ class CommonCounterWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer2<CartController, ProductController>(
+    return Consumer2<CartPresenter, ProductPresenter>(
       builder: (context, cartCtrl, productCtrl, _) {
         return Container(
           height: 45.h,
@@ -40,14 +39,11 @@ class CommonCounterWidget extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               //!---Minus
-              uiCon.transparentButton(
+              CounterButtonWiget(
                 onPressed: () {
                   cartCtrl.onMinus(context, price, index);
                 },
-                style: SvgPicture.asset(minus),
-                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                minimumSize: MaterialStatePropertyAll(Size(50.h, 38.h)),
-                padding: const MaterialStatePropertyAll(EdgeInsets.zero),
+                icon: minus,
               ),
 
               //!---Text
@@ -58,14 +54,11 @@ class CommonCounterWidget extends StatelessWidget {
               ),
 
               //!---Plus
-              uiCon.transparentButton(
+              CounterButtonWiget(
                 onPressed: () {
                   cartCtrl.onPlus(context, price, index);
                 },
-                style: SvgPicture.asset(plus),
-                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                minimumSize: MaterialStatePropertyAll(Size(50.h, 38.h)),
-                padding: const MaterialStatePropertyAll(EdgeInsets.zero),
+                icon: plus,
               ),
             ],
           ),
